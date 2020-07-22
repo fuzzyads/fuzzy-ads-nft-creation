@@ -1,0 +1,27 @@
+{
+  "name": "fuzzy-ad-contracts",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "create-token": "node --no-warnings ./src/services/create-token.js"
+  },
+  "dependencies": {
+    "@openzeppelin/contract-loader": "^0.6.1",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "ethereumjs-tx": "^2.1.2",
+    "ipfs": "^0.48.1",
+    "opensea-js": "^1.1.8",
+    "web3": "^1.2.11"
+  },
+  "devDependencies": {
+    "@openzeppelin/cli": "^2.8.2",
+    "@openzeppelin/contracts": "^3.1.0",
+    "@truffle/hdwallet-provider": "^1.0.39",
+    "ganache-cli": "^6.9.1"
+  },
+  "engines": {
+    "node": "10.x"
+  }
+}
