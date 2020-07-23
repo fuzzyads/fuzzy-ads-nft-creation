@@ -25,8 +25,13 @@ const web3 = new Web3(provider);
 
 const base_ipfs_uri = "https://ipfs.io/ipfs/";
 
-const start_time = Math.round(Date.now() / 1000 + 60 * 60 * 24 * 3);
-const expiration_time = Math.round(Date.now() / 1000 + 60 * 60 * 24 * 6);
+const how_many_days_till_ad = 5;
+const start_time = Math.round(
+  Date.now() / 1000 + 60 * 60 * 24 * how_many_days_till_ad
+);
+const expiration_time = Math.round(
+  Date.now() / 1000 + 60 * 60 * 24 * (how_many_days_till_ad + 1)
+);
 
 const nftContract = new web3.eth.Contract(abi, contract_address);
 

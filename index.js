@@ -1,6 +1,10 @@
 const token = require("./commands/token");
 const sell = require("./commands/sell");
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 (async () => {
   try {
     const {
@@ -9,16 +13,22 @@ const sell = require("./commands/sell");
       expirationTime,
       startTime,
     } = await token.create();
-    
+
+    await sleep(30000); // open sea takes a bit to update
+
+    /**
+     * TODO: try...catch with n retries if fail
+     * Open Sea may take a while to show
+     */
     // expiration of sale is the start of ad period
     const sale = await sell.token({
-      accountAddress: "0x1f777A796323c4a8F6C8c6B02d6D3727cAe664E4".toLowerCase(),
-      tokenId: "6",
-      expirationTime: 1595765921,
+      accountAddress: account.toLowerCase(),
+      tokenId: tokenId,
+      expirationTime: startTime,
       startAmount: 0.5,
     });
 
-    console.log("===> token is up for sale.")
+    console.log("===> token is up for sale.");
 
     process.exit();
   } catch (e) {
