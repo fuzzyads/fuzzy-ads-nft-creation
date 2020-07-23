@@ -16,13 +16,13 @@ Be sure to use node 10.x
 
 `yarn`
 
-### Create token
+### Create token and create auction
 
-`node ./commands/create-token.js`
+`node .`
 
 This will generate metadata for the ad slot, upload to IPFS and then mint the ERC-721 token.
 
-Auction creation is not yet implemented due to the fact that Infura does only allow raw transactions to be sent.
+It creates an auction on Open Sea. 
 
 ### Play with the blockchain 
 

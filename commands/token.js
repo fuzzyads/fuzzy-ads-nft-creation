@@ -89,8 +89,8 @@ const mint_token = async (token_uri) => {
     });
 };
 
-(async () => {
-  try {
+module.exports = {
+  create: async () => {
     const accounts = await web3.eth.getAccounts();
     web3.eth.defaultAccount = accounts[0];
 
@@ -104,10 +104,13 @@ const mint_token = async (token_uri) => {
     console.log("===> will submit token mint transaction");
     const tx = await mint_token(token_uri);
 
-    console.log("===> done. will stop");
+    const tokenId = await nftContract.methods.totalSupply().call();
 
-    process.exit();
-  } catch (e) {
-    console.log(e);
-  }
-})();
+    return {
+      tokenId,
+      account: web3.eth.defaultAccount,
+      expirationTime: expiration_time,
+      startTime: start_time,
+    };
+  },
+};

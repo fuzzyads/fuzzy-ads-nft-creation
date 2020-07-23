@@ -32,25 +32,22 @@ const seaport = new OpenSeaPort(providerEngine, {
   networkName: Network.Rinkeby,
 });
 
-
-(async () => {
-  try {
-    const expirationTime = Math.round(Date.now() / 1000 + 60 * 60 * 24 * 10)
-    const dutchAuctionSellOrder = await seaport.createSellOrder({
+module.exports = {
+  token: async ({
+    accountAddress,
+    tokenId,
+    expirationTime,
+    startAmount
+  }) => {
+    return await seaport.createSellOrder({
       asset: {
-        tokenId: 1,
+        tokenId: tokenId,
         tokenAddress: contract_address,
       },
-      startAmount: 1,
-      endAmount: 0.5,
+      startAmount,
+      endAmount: startAmount/2,
       expirationTime: expirationTime,
-      accountAddress: "0x1f777a796323c4a8f6c8c6b02d6d3727cae664e4",
-    })
-
-    console.log("===> done. will stop");
-
-    process.exit();
-  } catch (e) {
-    console.log(e);
-  }
-})();
+      accountAddress: accountAddress,
+    });
+  },
+};
