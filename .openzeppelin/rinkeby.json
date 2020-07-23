@@ -4,14 +4,9 @@
   "proxies": {
     "fuzzy-ad-contracts/Ad": [
       {
-        "address": "0xdE2aBb308E34fB2A55bD58F056E316869aD82C50",
+        "address": "0x8D1d1467Fe47F5ee1D923033117De927D91D1124",
         "kind": "NonProxy",
-        "bytecodeHash": "5f73fc83ee1662b2394c3068cc16d45c8f0c5259dad1a224e890de9371fdfe55"
-      },
-      {
-        "address": "0x917272555Bcf446D693649C30Ff8D268315744BC",
-        "kind": "NonProxy",
-        "bytecodeHash": "e7f15a95f79725e833f4306a27c2ead99c5a4e559c04c04224f06f03ee2815c2"
+        "bytecodeHash": "95657720bfa570c1592b77a445a6aa84b3dc93a79fd4ec044bc48a18e57972fc"
       }
     ]
   },

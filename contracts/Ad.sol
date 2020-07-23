@@ -8,39 +8,42 @@ contract Ad is ERC721, Ownable {
     
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    
-    struct AdMetadata {
-        string ipfsHash;
-        uint64 startingTime;
-        uint64 expiryDate;
+
+    struct AdvertisingPeriod {
+        uint256 startTime;
+        uint256 endTime;
     }
     
-    mapping (uint256 => AdMetadata) public adIdToMetadata;
-    mapping (uint64 => uint256) public startingTimeToTokenId;
+    mapping (uint256 => AdvertisingPeriod) public advertisingPeriods;
+    mapping (uint256 => string) public metadata;
+
+    event AdSlotCreated(uint256 indexed tokenId, address indexed tokenOwner, uint256 indexed startTime, uint256 endTime);
     
     constructor() public ERC721("FuzzyAds", "FUZZY") {}
     
-    function createAd(uint64 startingTime, string memory tokenURI) public onlyOwner returns (uint256)
-    {
+    function createAd(uint64 startTime, uint64 endTime, string memory tokenURI) public onlyOwner {
+        require(startTime > now, "Token must have start time in the future.");
+        require(startTime < endTime, "Start time must be lower than End time.");
+
         _tokenIds.increment();
         
-        uint256 newItemId = _tokenIds.current();
+        uint256 newTokenId = _tokenIds.current();
+
+        _mint(msg.sender, newTokenId);
+        _setTokenURI(newTokenId, tokenURI);
+
+        advertisingPeriods[newTokenId] = AdvertisingPeriod(startTime, endTime);
         
-        startingTimeToTokenId[startingTime] = newItemId;
-        adIdToMetadata[newItemId] = AdMetadata("{}", startingTime, startingTime + 1 days);
-        
-        _mint(msg.sender, newItemId);
-        _setTokenURI(newItemId, tokenURI);
-        
-        return newItemId;
+        emit AdSlotCreated(newTokenId, msg.sender, startTime, endTime);
     }
-    function getAdMetadata(uint tokenId) public view returns(string memory){
-        return adIdToMetadata[tokenId].ipfsHash;
+
+    function getMetadata(uint tokenId) public view returns(string memory){
+        return metadata[tokenId];
     }
-    
-    function setAdMetadata(uint256 tokenId, string memory ipfsHash) public {
+
+    function setMetadata(uint256 tokenId, string memory ipfsHash) public {
         if(msg.sender == ownerOf(tokenId)){
-            adIdToMetadata[tokenId].ipfsHash = ipfsHash;
+            metadata[tokenId] = ipfsHash;
         }
     }
 }

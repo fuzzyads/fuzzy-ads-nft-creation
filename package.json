@@ -3,17 +3,16 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
-  "scripts": {
-    "create-token": "node --no-warnings ./src/services/create-token.js"
-  },
   "dependencies": {
+    "@0x/subproviders": "^6.1.1",
     "@openzeppelin/contract-loader": "^0.6.1",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "ethereumjs-tx": "^2.1.2",
     "ipfs": "^0.48.1",
     "opensea-js": "^1.1.8",
-    "web3": "^1.2.11"
+    "web3": "^1.2.11",
+    "web3-provider-engine": "^15.0.12"
   },
   "devDependencies": {
     "@openzeppelin/cli": "^2.8.2",

@@ -18,7 +18,7 @@ Be sure to use node 10.x
 
 ### Create token
 
-`yarn create-token`
+`node ./commands/create-token.js`
 
 This will generate metadata for the ad slot, upload to IPFS and then mint the ERC-721 token.
 
@@ -29,12 +29,3 @@ Auction creation is not yet implemented due to the fact that Infura does only al
 - Read data from the contract: `npx oz call`
 - Write data to the contract (**warning**: beware this changes and may break things): `npx oz send-tx`
 
-## Structure
-
-- .openzeppelin: information of deployed contracts, among other things 
-- build/contracts: latest compiled contract
-- contracts: the contracts
-- src/services: business logic
-- networks.js: OZ network config
-
-# fuzzy-ads-nft-creation
